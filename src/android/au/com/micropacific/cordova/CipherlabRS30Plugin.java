@@ -79,7 +79,7 @@ public class CipherlabRS30Plugin extends CordovaPlugin {
         }
         
         if (action.equals("getServiceVersion")) {
-            String message = mReaderManager.Get_BarcodeServiceVer()
+            String message = mReaderManager.Get_BarcodeServiceVer();
             this.echo(message, callbackContext);
             return true;
         }
