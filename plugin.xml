@@ -2,20 +2,16 @@
 <!--
 This file is part of Apache Cordova Barcode Scanner Plugin for Cipherlab RS30, 
 which shall be referred to as "the Software"
-
 The Software is authored by Michael Ribbons who shall be referred to as "the Author".
-
 The MDR License (MDR)
 Copyright (c) 2015 Michael Ribbons
 Use of the Software is granted on a case by case basis.
-
 Permission is NOT hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, or to permit persons to whom the Software is
 furnished to do so.
-
 In the event that permission to use the Software is granted by the Author,
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
@@ -43,7 +39,7 @@ SOFTWARE.
   </js-module><platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="CipherlabRS30CordovaPlugin">
-        <param name="android-package" value="au.com.micropacific.cordova.CipherlabRS30Plugin" />
+        <param name="android-package" value="au.com.micropacific.cordova" />
       </feature>
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml">
