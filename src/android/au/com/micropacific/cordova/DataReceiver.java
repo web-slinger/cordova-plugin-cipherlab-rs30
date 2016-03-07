@@ -17,7 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-package au.com.micropacific.cordova.CipherlabRS30CordovaPlugin;
+package au.com.micropacific.cordova;
 
 import com.cipherlab.barcode.*;
 import com.cipherlab.barcode.decoder.*;
