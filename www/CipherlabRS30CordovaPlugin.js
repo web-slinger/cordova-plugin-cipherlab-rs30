@@ -25,10 +25,11 @@ var CipherlabRS30CordovaPlugin = function (require, exports, module) {
 
         this.echo = function (str, callback) {
             cordova.exec(callback, function (err) {
-                //alert("Something wrong");
-                //alert("error: " + err);
-                //callback('Nothing to echo.');
             }, "CipherlabRS30CordovaPlugin", "echo", [str]);
+        }
+	this.getServiceVersion = function (callback) {
+            cordova.exec(callback, function (err) {
+            }, "CipherlabRS30CordovaPlugin", "echo", []);
         }
 
         this.initialise = function (callback) {
@@ -41,15 +42,15 @@ var CipherlabRS30CordovaPlugin = function (require, exports, module) {
             }, "CipherlabRS30CordovaPlugin", "destroy", []);
         }
 		
-		this.setReceiveScanCallback = function (callback) {
-			cordova.exec(callback, function (err) {
-			}, "CipherlabRS30CordovaPlugin", "setReceiveScanCallback", []);
-		}
-		
-		this.requestScan = function(callback) {
-			cordova.exec(callback, function (err) {
-			}, "CipherlabRS30CordovaPlugin", "requestScan", []);
-		}
+	this.setReceiveScanCallback = function (callback) {
+		cordova.exec(callback, function (err) {
+		}, "CipherlabRS30CordovaPlugin", "setReceiveScanCallback", []);
+	}
+	
+	this.requestScan = function(callback) {
+		cordova.exec(callback, function (err) {
+		}, "CipherlabRS30CordovaPlugin", "requestScan", []);
+	}
     }
 
     module.exports = new EchoService();
