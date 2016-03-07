@@ -65,8 +65,8 @@ public class CipherlabRS30Plugin extends CordovaPlugin {
 	{
 	}
 
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException 
+	@Override
+	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException 
 	{
 
         //System.out.println("============== execute ===========");
@@ -77,64 +77,70 @@ public class CipherlabRS30Plugin extends CordovaPlugin {
             this.echo(message, callbackContext);
             return true;
         }
+        
+        if (action.equals("getServiceVersion")) {
+            String message = mReaderManager.Get_BarcodeServiceVer()
+            this.echo(message, callbackContext);
+            return true;
+        }
 
-		if (action.equals("initialise")) {
-			this.initialise(callbackContext);
-			return true;
-		}
+	if (action.equals("initialise")) {
+		this.initialise(callbackContext);
+		return true;
+	}
+	
+	if (action.equals("setReceiveScanCallback")) {
+		Log.v("CipherlabRS30Plugin", " ==== setReceiveScanCallback ===");
+		receiveScanCallback = callbackContext;
 		
-		if (action.equals("setReceiveScanCallback")) {
-			Log.v("CipherlabRS30Plugin", " ==== setReceiveScanCallback ===");
-			receiveScanCallback = callbackContext;
-			
-			if (callbackContext == null)
-			{
-				Log.v("CipherlabRS30Plugin", "callbackContext is null.");
-			} else {
-				Log.v("CipherlabRS30Plugin", "callbackContext is not null");
-			}
-			
-			return true;
-		}
-		
-		if (action.equals("requestScan"))
+		if (callbackContext == null)
 		{
-			//Log.v("CipherlabRS30Plugin", "requestScan");
-			
-			if (mReaderManager != null)
-			{
-				mReaderManager.SoftScanTrigger();
-			}
-		
-			return true;
+			Log.v("CipherlabRS30Plugin", "callbackContext is null.");
+		} else {
+			Log.v("CipherlabRS30Plugin", "callbackContext is not null");
 		}
 		
-		if (action.equals("destroy"))
+		return true;
+	}
+	
+	if (action.equals("requestScan"))
+	{
+		//Log.v("CipherlabRS30Plugin", "requestScan");
+		
+		if (mReaderManager != null)
 		{
-		
-			if (mReaderManager != null)
-			{
-				// Call this from window.onbeforeunload
-				Log.v("CipherlabRS30Plugin", "destroy(): cleaning up.");
-			
-				cordova.getActivity().unregisterReceiver(mDataReceiver);
-				mReaderManager.Release();
-			
-				mDataReceiver = null;
-				mReaderManager = null;
-			}
-		
-			return true;
+			mReaderManager.SoftScanTrigger();
 		}
+	
+		return true;
+	}
+	
+	if (action.equals("destroy"))
+	{
+	
+		if (mReaderManager != null)
+		{
+			// Call this from window.onbeforeunload
+			Log.v("CipherlabRS30Plugin", "destroy(): cleaning up.");
 		
-		Log.v("CipherlabRS30Plugin", "============== done   ===========: " + action);
+			cordova.getActivity().unregisterReceiver(mDataReceiver);
+			mReaderManager.Release();
+		
+			mDataReceiver = null;
+			mReaderManager = null;
+		}
+	
+		return true;
+	}
+	
+	Log.v("CipherlabRS30Plugin", "============== done   ===========: " + action);
 
         return false;
     }
 	
 	public void receieveScan(String data, int format)
 	{	
-		 final JSONObject result = new JSONObject();
+		final JSONObject result = new JSONObject();
 		try {
 			result.put("text",data);
 			result.put("format",format);
