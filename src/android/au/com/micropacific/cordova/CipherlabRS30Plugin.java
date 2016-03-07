@@ -47,6 +47,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * This class echoes a string called from JavaScript.
@@ -61,85 +64,82 @@ public class CipherlabRS30Plugin extends CordovaPlugin {
 	private DataReceiver mDataReceiver;
 	private CallbackContext receiveScanCallback;
 
-	public CipherlabRS30Plugin()
-	{
+	public CipherlabRS30Plugin(){
+		
 	}
 
 	@Override
-	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException 
-	{
+	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        //System.out.println("============== execute ===========");
-        Log.v("CipherlabRS30Plugin", "============== execute ===========: " + action);
-
-        if (action.equals("echo")) {
-            String message = args.getString(0);
-            this.echo(message, callbackContext);
-            return true;
-        }
-        
-        if (action.equals("getServiceVersion")) {
-            String message = mReaderManager.Get_BarcodeServiceVer();
-            this.echo(message, callbackContext);
-            return true;
-        }
-
-	if (action.equals("initialise")) {
-		this.initialise(callbackContext);
-		return true;
-	}
+	        Log.v("CipherlabRS30Plugin", "============== execute ===========: " + action);
 	
-	if (action.equals("setReceiveScanCallback")) {
-		Log.v("CipherlabRS30Plugin", " ==== setReceiveScanCallback ===");
-		receiveScanCallback = callbackContext;
-		
-		if (callbackContext == null)
-		{
-			Log.v("CipherlabRS30Plugin", "callbackContext is null.");
-		} else {
-			Log.v("CipherlabRS30Plugin", "callbackContext is not null");
+	        if (action.equals("echo")) {
+	            String message = args.getString(0);
+	            this.echo(message, callbackContext);
+	            return true;
+	        }
+	        
+	        if (action.equals("getServiceVersion")) {
+	            String message = mReaderManager.Get_BarcodeServiceVer();
+	            this.echo(message, callbackContext);
+	            return true;
+	        }
+	
+		if (action.equals("initialise")) {
+			this.initialise(callbackContext);
+			return true;
 		}
 		
-		return true;
-	}
-	
-	if (action.equals("requestScan"))
-	{
-		//Log.v("CipherlabRS30Plugin", "requestScan");
-		
-		if (mReaderManager != null)
-		{
-			mReaderManager.SoftScanTrigger();
+		if (action.equals("setReceiveScanCallback")) {
+			Log.v("CipherlabRS30Plugin", " ==== setReceiveScanCallback ===");
+			receiveScanCallback = callbackContext;
+			
+			if (callbackContext == null)
+			{
+				Log.v("CipherlabRS30Plugin", "callbackContext is null.");
+			} else {
+				Log.v("CipherlabRS30Plugin", "callbackContext is not null");
+			}
+			
+			return true;
 		}
-	
-		return true;
-	}
-	
-	if (action.equals("destroy"))
-	{
-	
-		if (mReaderManager != null)
+		
+		if (action.equals("requestScan"))
 		{
-			// Call this from window.onbeforeunload
-			Log.v("CipherlabRS30Plugin", "destroy(): cleaning up.");
+			//Log.v("CipherlabRS30Plugin", "requestScan");
+			
+			if (mReaderManager != null)
+			{
+				mReaderManager.SoftScanTrigger();
+			}
 		
-			cordova.getActivity().unregisterReceiver(mDataReceiver);
-			mReaderManager.Release();
-		
-			mDataReceiver = null;
-			mReaderManager = null;
+			return true;
 		}
+		
+		if (action.equals("destroy"))
+		{
+		
+			if (mReaderManager != null)
+			{
+				// Call this from window.onbeforeunload
+				Log.v("CipherlabRS30Plugin", "destroy(): cleaning up.");
+			
+				cordova.getActivity().unregisterReceiver(mDataReceiver);
+				mReaderManager.Release();
+			
+				mDataReceiver = null;
+				mReaderManager = null;
+			}
+		
+			return true;
+		}
+		
+		Log.v("CipherlabRS30Plugin", "============== done   ===========: " + action);
 	
-		return true;
+	        return false;
 	}
 	
-	Log.v("CipherlabRS30Plugin", "============== done   ===========: " + action);
-
-        return false;
-    }
-	
-	public void receieveScan(String data, int format)
-	{	
+	public void receieveScan(String data, int format){	
 		String[] array = data.split(":",2); 
 		
 		final JSONObject result = new JSONObject();
@@ -160,13 +160,13 @@ public class CipherlabRS30Plugin extends CordovaPlugin {
 		}
 	}
 
-    private void echo(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-        } else {
-            callbackContext.error("Expected one non-empty string argument.");
-        }
-    }
+    	private void echo(String message, CallbackContext callbackContext) {
+	        if (message != null && message.length() > 0) {
+	            callbackContext.success(message);
+	        } else {
+	            callbackContext.error("Expected one non-empty string argument.");
+	        }
+    	}
 
 	public void initialise(CallbackContext callbackContext)
 	{
