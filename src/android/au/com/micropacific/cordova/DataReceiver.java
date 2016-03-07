@@ -94,7 +94,7 @@ public class DataReceiver extends BroadcastReceiver {
 			settings.autoEnterChar = OutputEnter.None; 
 			settings.showCodeType = Enable_State.TRUE;
 			settings.showCodeLen = Enable_State.FALSE;
-			settings.useDelim = ":";
+			settings.useDelim = ':';
 			settings.enableKeyboardEmulation = KeyboardEmulationType.None;
 			
 			// settings.enableKeyboardEmulation = Enable_State.FALSE;
