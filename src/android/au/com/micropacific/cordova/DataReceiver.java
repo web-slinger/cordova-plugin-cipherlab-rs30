@@ -90,7 +90,11 @@ public class DataReceiver extends BroadcastReceiver {
 			
 			ReaderOutputConfiguration settings = new ReaderOutputConfiguration();
 			mReaderManager.Get_ReaderOutputConfiguration(settings);
-			
+			settings.autoEnterWay = OutputEnterWay.Disable; 
+			settings.autoEnterChar = OutputEnter.None; 
+			settings.showCodeType = Enable_State.TRUE;
+			settings.showCodeLen = Enable_State.FALSE;
+			settings.useDelim = ":";
 			settings.enableKeyboardEmulation = KeyboardEmulationType.None;
 			
 			// settings.enableKeyboardEmulation = Enable_State.FALSE;
