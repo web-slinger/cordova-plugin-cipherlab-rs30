@@ -85,12 +85,15 @@ public class DataReceiver extends BroadcastReceiver {
 				
 			BcReaderType myReaderType =  mReaderManager.GetReaderType();	
 			//e1.setText(myReaderType.toString());
-
-            ReaderOutputConfiguration settings = new ReaderOutputConfiguration();
-            mReaderManager.Get_ReaderOutputConfiguration(settings);
-            settings.enableKeyboardEmulation = Enable_State.FALSE;
-            mReaderManager.Set_ReaderOutputConfiguration(settings);
 			
+			ReaderOutputConfiguration settings = new ReaderOutputConfiguration();
+			mReaderManager.Get_ReaderOutputConfiguration(settings);
+			
+			settings.enableKeyboardEmulation = KeyboardEmulationType.None;
+			
+			// settings.enableKeyboardEmulation = Enable_State.FALSE;
+			
+			mReaderManager.Set_ReaderOutputConfiguration(settings);
 			
 			Log.v("CipherlabRS30Plugin", "got data, 3");
 
