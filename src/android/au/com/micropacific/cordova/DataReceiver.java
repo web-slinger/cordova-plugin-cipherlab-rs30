@@ -91,24 +91,19 @@ public class DataReceiver extends BroadcastReceiver {
 			ReaderOutputConfiguration settings = new ReaderOutputConfiguration();
 			mReaderManager.Get_ReaderOutputConfiguration(settings);
 			settings.autoEnterWay = OutputEnterWay.Disable; 
-			settings.autoEnterChar = OutputEnter.None; 
+			settings.autoEnterChar = OutputEnterChar.None; 
 			settings.showCodeType = Enable_State.TRUE;
 			settings.showCodeLen = Enable_State.FALSE;
 			settings.useDelim = ':';
 			settings.enableKeyboardEmulation = KeyboardEmulationType.None;
 			
+			// For old readerService
 			// settings.enableKeyboardEmulation = Enable_State.FALSE;
 			
 			mReaderManager.Set_ReaderOutputConfiguration(settings);
 			
 			Log.v("CipherlabRS30Plugin", "got data, 3");
 
-			/*NotificationParams settings = new NotificationParams();
-			mReaderManager.Get_NotificationParams(settings);
-				
-			ReaderOutputConfiguration settings2 = new ReaderOutputConfiguration();
-			mReaderManager.Get_ReaderOutputConfiguration(settings2);
-			*/
 		}
 
 	}
