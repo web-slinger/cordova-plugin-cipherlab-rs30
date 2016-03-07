@@ -66,20 +66,22 @@ public class DataReceiver extends BroadcastReceiver {
 				
 			// fetch the data within the intent
 			String data = intent.getStringExtra(GeneralString.BcReaderData);
+			int iCodeType = intent.getIntExtra(GeneralString.BcReaderCodeType, 0);
 				
 			// display the fetched data
 			//e1.setText(data);
 			Log.v("CipherlabRS30Plugin", "got data, 1: " + data);
-			this.plugin.receieveScan(data);
+			this.plugin.receieveScan(data,iCodeType);
 		}else if (intent.getAction().equals(GeneralString.Intent_PASS_TO_APP)){
 				
 			// fetch the data within the intent
 			String data = intent.getStringExtra(GeneralString.BcReaderData);
+			int iCodeType = intent.getIntExtra(GeneralString.BcReaderCodeType, 0);
 				
 			// display the fetched data
 			//e1.setText(data);
 			Log.v("CipherlabRS30Plugin", "got data, 2: " + data);
-			this.plugin.receieveScan(data);
+			this.plugin.receieveScan(data,iCodeType);
 				
 		}else if(intent.getAction().equals(GeneralString.Intent_READERSERVICE_CONNECTED)){
 				
