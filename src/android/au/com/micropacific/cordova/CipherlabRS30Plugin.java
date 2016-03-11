@@ -140,12 +140,10 @@ public class CipherlabRS30Plugin extends CordovaPlugin {
 	}
 	
 	public void receieveScan(String data, int format){	
-		String[] array = data.split(":",2); 
-		
+
 		final JSONObject result = new JSONObject();
 		try {
-			result.put("text",array[1]);
-			result.put("format",array[0]);
+			result.put("text",data);
 			result.put("formatID",format);
 		} catch (JSONException e) { e.printStackTrace(); }
 		
