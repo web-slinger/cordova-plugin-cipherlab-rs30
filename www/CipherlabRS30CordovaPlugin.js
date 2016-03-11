@@ -44,16 +44,17 @@ var CipherlabRS30CordovaPlugin = function (require, exports, module) {
     }
 
 		this.setReceiveScanCallback = function (callback) {
+			var barcodes = this.barcodeTypes;
 			var cb = function(data) {
 				data.format = "Unknown";
-				for(var key in this.barcodeTypes) {
-					if(this.barcodeTypes[key] == data.formatID) {
+				for(var key in barcodes) {
+					if(barcodes[key] == parseInt(data.formatID)) {
 						data.format = key;
 						break;
 					}
 				}
 				callback(data);
-      }
+      			}
 			cordova.exec(cb, function (err) {
 			}, "CipherlabRS30CordovaPlugin", "setReceiveScanCallback", []);
 		}
