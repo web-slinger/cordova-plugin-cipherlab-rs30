@@ -24,22 +24,22 @@ var CipherlabRS30CordovaPlugin = function (require, exports, module) {
     function EchoService() {
 
         this.echo = function (str, callback) {
-            cordova.exec(callback, function (err) {
-            }, "CipherlabRS30CordovaPlugin", "echo", [str]);
+			cordova.exec(callback, function (err) {
+			}, "CipherlabRS30CordovaPlugin", "echo", [str]);
         }
 		this.getServiceVersion = function (callback) {
-            cordova.exec(callback, function (err) {
-            }, "CipherlabRS30CordovaPlugin", "getServiceVersion", []);
+			cordova.exec(callback, function (err) {
+			}, "CipherlabRS30CordovaPlugin", "getServiceVersion", []);
         }
 
         this.initialise = function (callback) {
-            cordova.exec(callback, function (err) {
-            }, "CipherlabRS30CordovaPlugin", "initialise", []);
+			cordova.exec(callback, function (err) {
+			}, "CipherlabRS30CordovaPlugin", "initialise", []);
         }
 
         this.destroy = function (callback) {
-            cordova.exec(callback, function (err) {
-            }, "CipherlabRS30CordovaPlugin", "destroy", []);
+			cordova.exec(callback, function (err) {
+			}, "CipherlabRS30CordovaPlugin", "destroy", []);
         }
 		
 		this.setReceiveScanCallback = function (callback) {
@@ -47,9 +47,9 @@ var CipherlabRS30CordovaPlugin = function (require, exports, module) {
 			if(typeof obj == "Object" && obj.hasOwnProperty("formatID")){
 				obj.formatType = "Unknown";
 				for(var key in this.barcodeTypes) {
-				    if(this.barcodeTypes[key] === obj.formatID) {
-				        obj.formatType = key;
-				    }
+					if(this.barcodeTypes[key] === obj.formatID) {
+						obj.formatType = key;
+					}
 				}
 				callback(obj);
 			} else {
@@ -58,12 +58,12 @@ var CipherlabRS30CordovaPlugin = function (require, exports, module) {
 			cordova.exec(cb, function (err) {
 			}, "CipherlabRS30CordovaPlugin", "setReceiveScanCallback", []);
 		}
-		
+	
 		this.requestScan = function(callback) {
 			cordova.exec(callback, function (err) {
 			}, "CipherlabRS30CordovaPlugin", "requestScan", []);
 		}
-		
+	
 		this.barcodeTypes = {
 			"Unknown": 0,
 			"Composite_CC_A": 47,
