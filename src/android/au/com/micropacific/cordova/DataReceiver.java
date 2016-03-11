@@ -72,7 +72,8 @@ public class DataReceiver extends BroadcastReceiver {
 			//e1.setText(data);
 			Log.v("CipherlabRS30Plugin", "got data, 1: " + data);
 			this.plugin.receieveScan(data,iCodeType);
-		}else if (intent.getAction().equals(GeneralString.Intent_PASS_TO_APP)){
+			
+		} else if (intent.getAction().equals(GeneralString.Intent_PASS_TO_APP)){
 				
 			// fetch the data within the intent
 			String data = intent.getStringExtra(GeneralString.BcReaderData);
@@ -83,27 +84,51 @@ public class DataReceiver extends BroadcastReceiver {
 			Log.v("CipherlabRS30Plugin", "got data, 2: " + data);
 			this.plugin.receieveScan(data,iCodeType);
 				
-		}else if(intent.getAction().equals(GeneralString.Intent_READERSERVICE_CONNECTED)){
+		} else if (intent.getAction().equals(GeneralString.Intent_READERSERVICE_CONNECTED)){
+			try {
+				BcReaderType myReaderType =  mReaderManager.GetReaderType();	
+				//e1.setText(myReaderType.toString());
 				
-			BcReaderType myReaderType =  mReaderManager.GetReaderType();	
-			//e1.setText(myReaderType.toString());
-			
-			ReaderOutputConfiguration settings = new ReaderOutputConfiguration();
-			mReaderManager.Get_ReaderOutputConfiguration(settings);
-			settings.autoEnterWay = OutputEnterWay.Disable; 
-			settings.autoEnterChar = OutputEnterChar.None; 
-			settings.showCodeType = Enable_State.TRUE;
-			settings.showCodeLen = Enable_State.FALSE;
-			settings.useDelim = ':';
-			settings.enableKeyboardEmulation = KeyboardEmulationType.None;
-			
-			// For old readerService
-			// settings.enableKeyboardEmulation = Enable_State.FALSE;
-			
-			mReaderManager.Set_ReaderOutputConfiguration(settings);
-			
-			Log.v("CipherlabRS30Plugin", "got data, 3");
-
+				ReaderOutputConfiguration settings = new ReaderOutputConfiguration();
+				mReaderManager.Get_ReaderOutputConfiguration(settings);
+				settings.autoEnterWay = OutputEnterWay.Disable; 
+				settings.autoEnterChar = OutputEnterChar.None; 
+				settings.showCodeType = Enable_State.FALSE;
+				settings.showCodeLen = Enable_State.FALSE;
+				settings.enableKeyboardEmulation = KeyboardEmulationType.None;
+				
+				// For old readerService
+				// settings.enableKeyboardEmulation = Enable_State.FALSE;
+				
+				mReaderManager.Set_ReaderOutputConfiguration(settings);
+				
+				//Maybe check the settings are set successfully set?
+				
+				// If successful, it returns ClResult.S_ERR. Otherwise, return other values.
+				// ClResult clRet = mReaderManager.Set_ReaderOutputConfiguration(settings);
+				// if (ClResult.S_ERR == clRet){
+				// 	Log.v("CipherlabRS30Plugin", "Set_ReaderOutputConfiguration was failed");
+				// } else if (ClResult.Err_InvalidParameter == clRet){
+				// 	Log.v("CipherlabRS30Plugin", "Set_ReaderOutputConfiguration was InvalidParameter");
+				// } else if (ClResult.Err_NotSupport == clRet){
+				// 	Log.v("CipherlabRS30Plugin", "Set_ReaderOutputConfiguration was NotSupport");
+				// } else if (ClResult.S_OK == clRet){
+				// 	Log.v("CipherlabRS30Plugin", "Set_ReaderOutputConfiguration was Ok");
+				// }
+				
+				Log.v("CipherlabRS30Plugin", "got data, 3");
+			}
+			catch(Exception e){
+				
+				StringWriter writer = new StringWriter();
+				PrintWriter printWriter = new PrintWriter( writer );
+				e.printStackTrace( printWriter );
+				printWriter.flush();
+	
+				String stackTrace = writer.toString();
+	
+				Log.v("CipherlabRS30Plugin", "Error initialising reader service: " + stackTrace);
+			}
 		}
 
 	}
