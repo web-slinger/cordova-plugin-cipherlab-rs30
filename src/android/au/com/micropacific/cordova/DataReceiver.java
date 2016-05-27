@@ -95,8 +95,11 @@ public class DataReceiver extends BroadcastReceiver {
 				settings.autoEnterChar = OutputEnterChar.None; 
 				settings.showCodeType = Enable_State.FALSE;
 				settings.showCodeLen = Enable_State.FALSE;
+			
 				// ADDED TO STOP EXTRA CHARACTERS BEING ADDED WHEN TICK BOX 'Transmit AIM Code ID' is true
-				settings.transmitCodeIdChar = TransmitCodeIDType.None;
+				// settings.transmitCodeIdChar = TransmitCodeIDType.None;				
+				// settings.transmitCheckDigit = Enable_State.FALSE;
+			
 				settings.enableKeyboardEmulation = KeyboardEmulationType.None;
 				
 				// For old readerService
