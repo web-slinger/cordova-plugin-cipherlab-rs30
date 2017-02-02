@@ -105,7 +105,7 @@ public class DataReceiver extends BroadcastReceiver {
 				// For old readerService
 				// settings.enableKeyboardEmulation = Enable_State.FALSE;
 				
-				if(CLResult.S_ERR == mReaderManager.Set_ReaderOutputConfiguration(settings)){
+				if(ClResult.S_ERR == mReaderManager.Set_ReaderOutputConfiguration(settings)){
 					Log.v("CipherlabRS30Plugin", "readerConfig FAILED");
 				} else {
 					Log.v("CipherlabRS30Plugin", "readerConfig SUCCESS");
@@ -115,7 +115,7 @@ public class DataReceiver extends BroadcastReceiver {
 				UserPreference usersetting = new UserPreference();
 				usersetting.laserOnTime = 6000;
 				
-				if(CLResult.S_ERR == mReaderManager.Set_UserPreferences(usersetting)){
+				if(ClResult.S_ERR == mReaderManager.Set_UserPreferences(usersetting)){
 					Log.v("CipherlabRS30Plugin", "userPreference FAILED");
 				} else {
 					Log.v("CipherlabRS30Plugin", "userPreference SUCCESS");
